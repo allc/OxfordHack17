@@ -1,7 +1,11 @@
 import java.util.*;
 
 // Request body
-class TextDocuments {
+interface Documents {
+
+}
+
+class TextDocuments implements Documents {
     public List<TextDocument> documents;
 
     public TextDocuments() {
@@ -23,7 +27,7 @@ class TextDocument {
 }
 
 // Response
-class TextResultDocuments {
+class TextResultDocuments implements Documents{
 
     public List<TextResultDocument> documents;
 

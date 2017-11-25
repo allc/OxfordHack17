@@ -15,7 +15,6 @@ public class TextProcess {
     private String getTextApiResult(TextDocuments documents) {
         try {
             String text = new Gson().toJson(documents);
-            System.out.println(text);
             byte[] encoded_text = text.getBytes("UTF-8");
 
             URL endpoint = new URL("https://westeurope.api.cognitive.microsoft.com/text/analytics/v2.0/keyPhrases");
@@ -46,6 +45,12 @@ public class TextProcess {
         return null;
     }
 
+    /**
+     * Returns list of key phrases
+     * @param text
+     * @param language
+     * @return list of key phrases
+     */
     public List<String> getKeyPhrases(String text, String language) {
         // get
         TextDocuments documents = new TextDocuments();
@@ -57,8 +62,8 @@ public class TextProcess {
         TextResultDocuments resultDocuments = new Gson().fromJson(jsonResult, TextResultDocuments.class);
         List<String> result = new ArrayList<>();
         for (TextResultDocument resultDocument : resultDocuments.documents) {
-            for (String keyParse : resultDocument.keyPhrases) {
-                result.add(keyParse);
+            for (String keyPhrase : resultDocument.keyPhrases) {
+                result.add(keyPhrase);
             }
         }
         return result;
@@ -66,7 +71,10 @@ public class TextProcess {
 
     public static void main(String[] args) {
         TextProcess tp = new TextProcess();
-        tp.getKeyPhrases("But there is an alternative view, or dogma, variously called nouvelle AI, fundamentalist AI, or in a weaker form situated activity", "en");
+        List<String> keys = tp.getKeyPhrases("But there is an alternative view, or dogma, variously called nouvelle AI, fundamentalist AI, or in a weaker form situated activity", "en");
+        for (String key : keys) {
+            System.out.println(key);
+        }
     }
 
 }

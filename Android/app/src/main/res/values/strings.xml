@@ -1,17 +1,31 @@
 <resources>
     <string name="app_name">OxHack</string>
+
+    <!-- Bottom bar strings-->
+
     <string name="bottom_tab1">Search</string>
     <string name="bottom_tab2">BookMarks</string>
     <string name="bottom_tab3">Others</string>
+
+
+
+    <!-- top tab bar strings-->
+
     <string name="top_video">Video</string>
     <string name="top_audio">Audio</string>
     <string name="top_image">Image</string>
     <string name="top_text">Text</string>
-    <string name="input_prompt_video">Video Address:</string>
-    <string name="input_prompt_audio">Audio:</string>
-    <string name="input_prompt_image">Image:</string>
-    <string name="input_prompt_text">Text:</string>
-    <string name="test_string">Test: </string>
+
+
+
+    <!-- input layout bar strings-->
+
+    <string name="URL_video">Video URL:</string>
+    <string name="URL_audio">Audio URL:</string>
+    <string name="URL_image">Image URL:</string>
+    <string name="URL_text">Text Content:</string>
+
+    <string name="test_string">Enter the URL here.</string>
     <string name="search_button">Search</string>
     <string name="clear_button">Clear</string>
 </resources>

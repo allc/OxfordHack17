@@ -11,12 +11,11 @@
 
     <TextView
         android:id="@+id/txt_content"
-        android:layout_width="59dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="125dp"
+        android:layout_height="31dp"
         android:layout_marginTop="4dp"
         android:gravity="center"
-        android:text="@string/test_string"
+        android:text="@string/URL_video"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -46,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/URL_edit_text" />
 
     <Button
-        android:id="@+id/video_URL_clear"
+        android:id="@+id/video_clear_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"

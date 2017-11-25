@@ -7,5 +7,8 @@
     <string name="top_audio">Audio</string>
     <string name="top_image">Image</string>
     <string name="top_text">Text</string>
-
+    <string name="input_prompt_video">Video Address:</string>
+    <string name="input_prompt_audio">Audio:</string>
+    <string name="input_prompt_image">Image:</string>
+    <string name="input_prompt_text">Text:</string>
 </resources>

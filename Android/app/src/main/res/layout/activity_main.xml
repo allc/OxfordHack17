@@ -31,6 +31,7 @@
         app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
+            android:id="@+id/content_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -96,9 +97,14 @@
 
             </LinearLayout>
 
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.constraint.ConstraintLayout>
 
         </LinearLayout>
-
 
 
 

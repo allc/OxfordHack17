@@ -2,12 +2,17 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 import javax.net.ssl.HttpsURLConnection;
-import javax.json.*;
+
 import com.google.gson.*;
 
 public class TextProcess {
 
-    public String getTextApiResult(Documents documents) {
+    /**
+     * Gets json result from API
+     * @param documents
+     * @return json result from API
+     */
+    private String getTextApiResult(TextDocuments documents) {
         try {
             String text = new Gson().toJson(documents);
             System.out.println(text);
@@ -41,14 +46,27 @@ public class TextProcess {
         return null;
     }
 
+    public List<String> getKeyPhrases(String text, String language) {
+        // get
+        TextDocuments documents = new TextDocuments();
+        documents.add ("1", language, text);
+        String jsonResult = getTextApiResult(documents);
+        System.out.println(jsonResult);
+
+        // parse
+        TextResultDocuments resultDocuments = new Gson().fromJson(jsonResult, TextResultDocuments.class);
+        List<String> result = new ArrayList<>();
+        for (TextResultDocument resultDocument : resultDocuments.documents) {
+            for (String keyParse : resultDocument.keyPhrases) {
+                result.add(keyParse);
+            }
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         TextProcess tp = new TextProcess();
-        Documents documents = new Documents ();
-        documents.add ("1", "en", "I really enjoy the new XBox One S. It has a clean look, it has 4K/HDR resolution and it is affordable.");
-        documents.add ("2", "es", "Si usted quiere comunicarse con Carlos, usted debe de llamarlo a su telefono movil. Carlos es muy responsable, pero necesita recibir una notificacion si hay algun problema.");
-        documents.add ("3", "en", "The Grand Hotel is a new hotel in the center of Seattle. It earned 5 stars in my review, and has the classiest decor I've ever seen.");
-        String response = tp.getTextApiResult(documents);
-        System.out.println(response);
+        tp.getKeyPhrases("But there is an alternative view, or dogma, variously called nouvelle AI, fundamentalist AI, or in a weaker form situated activity", "en");
     }
 
 }

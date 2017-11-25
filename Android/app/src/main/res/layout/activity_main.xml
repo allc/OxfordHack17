@@ -101,7 +101,7 @@
                 android:id="@+id/input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="350dp"
+                android:minHeight="1000dp"
                 android:background="@color/text_selected"
                 >
 

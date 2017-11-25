@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">OxHack</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="bottom_tab1">Search</string>
+    <string name="bottom_tab2">BookMarks</string>
+    <string name="bottom_tab3">Others</string>
+    <string name="top_video">Video</string>
+    <string name="top_audio">Audio</string>
+    <string name="top_image">Image</string>
+    <string name="top_text">Text</string>
+
 </resources>

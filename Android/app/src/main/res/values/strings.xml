@@ -32,4 +32,7 @@
 
     <!-- userguide layout bar strings-->
     <string name="guide_title">User Guide</string>
+
+
+    <string name="break_line">-----------Search results----------</string>
 </resources>

@@ -2,6 +2,8 @@ package com.example.yizheng.oxhack;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
@@ -63,6 +65,12 @@ public class MainActivity extends AppCompatActivity {
         fManager = getFragmentManager();
         bindListeners();
 
+        Uri uri=Uri.parse("http://www.google.com");
+        Intent intent=new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setData(uri);
+        MainActivity.this.startActivity(intent);
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         list = (ListView) findViewById(R.id.data_list);
 
@@ -79,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
         topAudio = (TextView) findViewById(R.id.top_tab2);
         topImage = (TextView) findViewById(R.id.top_tab3);
         topText = (TextView) findViewById(R.id.top_tab4);
+
+
 
         inputLayout = (ConstraintLayout) findViewById(R.id.input_layout);
 

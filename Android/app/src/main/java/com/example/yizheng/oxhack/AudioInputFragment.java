@@ -61,6 +61,7 @@ public class AudioInputFragment extends Fragment {
 
             ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(view.getContext(),R.layout.list_item, new ArrayList<String>(data.keySet()));
             dataList.setAdapter(listAdapter);
+            dataList.setOnItemClickListener(new ListItemClickListener(data,getActivity(),dataList));
         }
 
     }

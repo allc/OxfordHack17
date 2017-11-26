@@ -1,5 +1,6 @@
 package com.example.yizheng.oxhack;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,12 +28,13 @@ public class TextInputFragment extends Fragment {
     private EditText URLEditText;
     private ListView dataList;
     private View view;
+    private Activity act;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedINstanceState){
         view = inflater.inflate(R.layout.text_input_fragment,container,false);
-
+        act = getActivity();
         URLEditText = (EditText) view.findViewById(R.id.URL_edit_text);
         searchButton = (Button) view.findViewById(R.id.text_search_button);
         clearButton = (Button) view.findViewById(R.id.text_clear_button);
@@ -65,11 +67,11 @@ public class TextInputFragment extends Fragment {
 
             HashMap<String, String> data = new HashMap<>();
 
-            for(int i=0;i<30;i++)
-            {
-                data.put("Title"+i,"URL");
 
-            }
+            // Must have http:// otherwise Activity not found.
+            data.put("Google","http://www.google.com");
+            data.put("Amazon","http://www.amazon.co.uk");
+            data.put("Test","http://www.github.com");
 
             setList(data);
 
@@ -79,6 +81,7 @@ public class TextInputFragment extends Fragment {
 
             ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(view.getContext(),R.layout.list_item, new ArrayList<String>(data.keySet()));
             dataList.setAdapter(listAdapter);
+            dataList.setOnItemClickListener(new ListItemClickListener(data,TextInputFragment.this.getActivity(),dataList));
         }
     }
 

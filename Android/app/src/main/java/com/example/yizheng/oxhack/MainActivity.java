@@ -69,11 +69,6 @@ public class MainActivity extends AppCompatActivity {
         fManager = getFragmentManager();
         bindListeners();
 
-        Uri uri=Uri.parse("http://www.google.com");
-        Intent intent=new Intent();
-        intent.setAction(Intent.ACTION_VIEW);
-        intent.setData(uri);
-        MainActivity.this.startActivity(intent);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         list = (ListView) findViewById(R.id.data_list);

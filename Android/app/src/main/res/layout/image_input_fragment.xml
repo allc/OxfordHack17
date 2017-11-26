@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/URL_edit_text" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/previewImage"
         android:layout_width="162dp"
         android:layout_height="126dp"
         android:layout_marginStart="16dp"
@@ -84,7 +84,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="52dp"
         android:text="Local Image"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/previewImage"
         app:layout_constraintTop_toBottomOf="@+id/image_clear_button" />
 
     <Button
@@ -94,7 +94,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:text="Take A Picture"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/previewImage"
         app:layout_constraintTop_toBottomOf="@+id/local_image_button" />
 
 </android.support.constraint.ConstraintLayout>

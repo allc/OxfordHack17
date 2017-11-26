@@ -1,5 +1,7 @@
 package com.example.yizheng.oxhack;
 
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +21,7 @@ public class ClearButtonListener implements Button.OnClickListener {
     @Override
     public void onClick(View v){
         URLEdit.setText("");
+
     }
 
 

@@ -26,5 +26,5 @@ hs_err_pid*
 *.iml
 
 # Config not to be committed to the repository
-Core/Core/src/Config.java
+Config.java
 

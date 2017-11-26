@@ -16,6 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Yi Zheng on 11/25/2017.
@@ -59,23 +60,14 @@ public class TextInputFragment extends Fragment {
             String msg= "URL Read: ";
             Log.d(msg,URL);
 
-
-            // Get data method here.
-
-
-            HashMap<String, String> data = new HashMap<>();
-
-            for(int i=0;i<30;i++)
-            {
-                data.put("Title"+i,"URL");
-
-            }
+            String[] urls = {URL};
+            Map<String, String> data = new TextProcess().doQuery(URL);
 
             setList(data);
 
         }
 
-        public void setList(HashMap<String,String> data){
+        public void setList(Map<String,String> data){
 
             ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(view.getContext(),R.layout.list_item, new ArrayList<String>(data.keySet()));
             dataList.setAdapter(listAdapter);

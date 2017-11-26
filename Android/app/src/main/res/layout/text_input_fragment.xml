@@ -28,7 +28,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="60dp"
-        android:hint="@string/test_string"
+        android:hint="@string/text_content"
         android:selectAllOnFocus="true"
         android:singleLine="false"
         android:textColorHint="@color/colorPrimary"

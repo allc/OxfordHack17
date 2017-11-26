@@ -2,7 +2,11 @@ package com.example.yizheng.oxhack;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -24,6 +28,8 @@ import android.widget.TextView;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.util.List;
 
 /**
  * Created by Yi Zheng on 11/25/2017.
@@ -35,6 +41,9 @@ public class ImageInputFragment extends Fragment {
     private EditText URLEditText;
     private ImageView previewImage;
     private File imageFile = null;
+    private Button localImageButton;
+    private final int cameraCode = 2017;
+    private final int localCode = 2018;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedINstanceState){
@@ -45,6 +54,7 @@ public class ImageInputFragment extends Fragment {
         clearButton = (Button) view.findViewById(R.id.image_clear_button);
         takePicButton = (Button) view.findViewById(R.id.image_take_button);
         previewImage = (ImageView) view.findViewById(R.id.previewImage);
+        localImageButton = (Button) view.findViewById(R.id.local_image_button);
         addListeners();
 
         return view;
@@ -54,29 +64,47 @@ public class ImageInputFragment extends Fragment {
         searchButton.setOnClickListener(new ImageSearchButtonListener());
         clearButton.setOnClickListener(new ClearButtonListener(URLEditText));
         takePicButton.setOnClickListener(new CameraListener(previewImage));
+        localImageButton.setOnClickListener(new LocalImageOpenListener());
     }
 
-    class ImageSearchButtonListener implements Button.OnClickListener{
 
-        String URL;
-
-        @Override
-        public void onClick(View v){
-            URL = URLEditText.getText().toString();
-
-            // Do the HTTP query here.
-            String msg= "URL Read: ";
-            Log.d(msg,URL);
-        }
-
-    }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data){
-        if(requestCode == Activity.DEFAULT_KEYS_DIALER){
-            Bitmap bitmap = BitmapFactory.decodeFile( imageFile.getPath());
+
+        if (requestCode == cameraCode) {
+
+            Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getPath());
 
             previewImage.setImageBitmap(rotationFix(bitmap));
         }
+        else if(requestCode == localCode){
+            Uri uri = data.getData();
+
+            Log.d("local",uri.toString());
+            ContentResolver cr = getActivity().getContentResolver();
+            Bitmap bitmap;
+            try{
+                imageFile =  new File(getPath(uri,cr));
+                Bitmap bitmap2 = BitmapFactory.decodeFile(imageFile.getPath());
+                previewImage.setImageBitmap(rotationFix(bitmap2));
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    public String getPath(Uri uri, ContentResolver cr)
+    {
+        String[] projection = { MediaStore.Images.Media.DATA };
+        Cursor cursor = cr.query(uri, projection, null, null, null);
+        if (cursor == null) return null;
+        int column_index =             cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String s=cursor.getString(column_index);
+        cursor.close();
+        return s;
     }
 
     // Method to fix the rotation problem of images.
@@ -123,6 +151,39 @@ public class ImageInputFragment extends Fragment {
         return null;
     }
 
+    class LocalImageOpenListener implements Button.OnClickListener{
+
+
+        @Override
+        public void onClick(View v){
+            Intent intent = new Intent(
+                    Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            intent.setType("image/*");
+            PackageManager manager = getActivity().getPackageManager();
+            List<ResolveInfo> apps = manager.queryIntentActivities(intent,
+                    0);
+            if (apps.size() > 0) {
+                startActivityForResult(intent, localCode);
+            }
+        }
+    }
+
+    class ImageSearchButtonListener implements Button.OnClickListener{
+
+        String URL;
+
+        @Override
+        public void onClick(View v){
+            URL = URLEditText.getText().toString();
+
+            // Do the HTTP query here.
+            String msg= "URL Read: ";
+            Log.d(msg,URL);
+        }
+
+    }
+
     class CameraListener implements Button.OnClickListener {
 
         private ImageView previewImage;
@@ -152,7 +213,7 @@ public class ImageInputFragment extends Fragment {
 
             Intent photoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             photoIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(imageFile));
-            startActivityForResult(photoIntent,Activity.DEFAULT_KEYS_DIALER);
+            startActivityForResult(photoIntent,cameraCode);
 
         }
 

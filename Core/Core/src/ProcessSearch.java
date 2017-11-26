@@ -1,26 +1,27 @@
-package com.example.yizheng.oxhack;
-
-import android.util.Log;
-
 import org.json.JSONObject;
 
-import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.net.URLEncoder;
 
-public class GetWikipedia {
+import javax.net.ssl.HttpsURLConnection;
 
-    public String getWikiSummary(String page) {
+/**
+ * Created by Allen on 2017/11/26.
+ */
+
+public class ProcessSearch {
+
+    public String getSearchApiResult(String keyWord) {
         try {
-            String endpoint = "https://en.wikipedia.org/api/rest_v1/page/summary/" + page;
-            String urlParameters = "?redirect=true";
+            String endpoint = "https://api.cognitive.microsoft.com/bing/v7.0/search";
+            String urlParameters = "?q=" + URLEncoder.encode(keyWord, "UTF-8");
             URL endpointURL = new URL(endpoint + urlParameters);
             HttpsURLConnection connection = (HttpsURLConnection) endpointURL.openConnection();
             connection.setRequestMethod("GET");
-            //connection.setRequestProperty("Content-Type", "application/octet-stream");
-            connection.setRequestProperty("Api-User-Agent", "hack_20201@outlook.com");
+            connection.setRequestProperty("Content-Type", "text/json");
+            connection.setRequestProperty("Ocp-Apim-Subscription-Key", Config.WEB_SEARCH_API_KEY);
             connection.setDoOutput(true);
 
 //            DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
@@ -44,20 +45,14 @@ public class GetWikipedia {
         return null;
     }
 
-    public String getExtract(String page) {
-        String resultJson = getWikiSummary(page);
-        try {
-            JSONObject jsonObject = new JSONObject(resultJson);
-            return jsonObject.get("extract").toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+    public String getUrl(String keyWord) {
+        String resultJson = getSearchApiResult(keyWord);
+        JSONObject jsonObject = new JSONObject(resultJson);
+        return jsonObject.getJSONObject("webPages").getJSONArray("value").getJSONObject(0).get("url").toString();
     }
 
     public static void main(String[] args) {
-        GetWikipedia w = new GetWikipedia();
-        System.out.println(w.getWikiSummary("nouvelle AI"));
+        System.out.println(new ProcessSearch().getUrl("nouvelle AI"));
     }
 
 }

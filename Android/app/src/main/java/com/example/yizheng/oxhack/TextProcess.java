@@ -76,10 +76,13 @@ public class TextProcess {
 
     public Map<String, String> doQuery(String query) {
         Map<String, String> result = new TreeMap<>();
-        Log.d("a---------------------\n", query);
+        //Log.d("a---------------------\n", query);
         List<String> keyPhrases = getKeyPhrases(query, "en");
         for (String keyPhras : keyPhrases) {
-            result.put(keyPhras, new GetWikipedia().getExtract(keyPhras));
+            String url = new ProcessSearch().getUrl(keyPhras);
+            //String url = new GetWikipedia().getExtract(keyPhras);
+            result.put(keyPhras, url);
+            //Log.d("---------------\n", url);
         }
         return result;
     }

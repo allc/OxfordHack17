@@ -1,5 +1,3 @@
-import com.google.gson.Gson;
-
 import javax.net.ssl.HttpsURLConnection;
 import java.net.URL;
 import java.io.*;

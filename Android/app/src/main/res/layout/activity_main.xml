@@ -102,6 +102,8 @@
             android:orientation="vertical">
 
 
+
+
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/input_layout"
                 android:layout_width="match_parent"
@@ -123,7 +125,13 @@
 
 
             </android.support.constraint.ConstraintLayout>
-
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/text_selected"
+                android:textAlignment="center"
+                android:text="@string/break_line" />
             <ListView
                 android:id="@+id/data_list"
                 android:layout_width="720dp"

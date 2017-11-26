@@ -199,6 +199,20 @@ public class ImageInputFragment extends Fragment {
             // Do the HTTP query here.
             String msg= "URL Read: ";
             Log.d(msg,URL);
+
+            // Get data method here.
+
+
+            HashMap<String, String> data = new HashMap<>();
+
+
+            // Must have http:// otherwise Activity not found.
+            data.put("Google","http://www.google.com");
+            data.put("Amazon","http://www.amazon.co.uk");
+            data.put("Test","http://www.github.com");
+
+            setList(data);
+
         }
 
 

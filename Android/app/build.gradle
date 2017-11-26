@@ -30,4 +30,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile 'com.microsoft.projectoxford:speechrecognition:1.2.2'
     implementation files('/Users/Allen/Documents/oxhack17/OxfordHack17/Core/lib/gson-2.8.2.jar')
+    implementation files('/Users/Allen/Documents/oxhack17/OxfordHack17/Core/lib/json-20171018.jar')
 }

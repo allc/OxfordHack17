@@ -74,9 +74,10 @@ public class ImageInputFragment extends Fragment {
         localImageButton.setOnClickListener(new LocalImageOpenListener());
     }
 
-    public File getBufferedImage(){
+    public Bitmap getBufferedImage(){
         if(imageFile != null){
-            return imageFile;
+            Bitmap bitmap = BitmapFactory.decodeFile(imageFile.getPath());
+            return bitmap;
         }
         else{
             System.err.println("NO FILE LOADED!!!");

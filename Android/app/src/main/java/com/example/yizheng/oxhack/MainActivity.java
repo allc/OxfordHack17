@@ -2,21 +2,13 @@ package com.example.yizheng.oxhack;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.TabActivity;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,7 +18,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView topText;
     private ConstraintLayout inputLayout;
 
-    private InputFragement inputfg1, inputfg2,inputfg3,inputfg4;
+    private TextInputFragment inputfg4;
+    private ImageInputFragment inputfg3;
+    private VideoInputFragment inputfg1;
+    private AudioInputFragment inputfg2;
     private FragmentManager fManager;
 
 
@@ -61,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
         bindListeners();
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        //navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        //navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+
     }
 
     private void bindListeners(){
@@ -82,12 +78,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    // Listener to change the input search layout.
     class clickListener implements View.OnClickListener{
 
         @Override
         public void onClick(View v){
-            String msg = "asdfasdf";
-            Log.d(msg,"asdfasdf");
             FragmentTransaction fTransaction = fManager.beginTransaction();
             hideAllFragement(fTransaction);
             switch(v.getId()){
@@ -95,8 +91,8 @@ public class MainActivity extends AppCompatActivity {
                     setSelected();
                     topVideo.setSelected(true);
                     if(inputfg1 == null){
-                        inputfg1 = new InputFragement();
-                        inputfg1.setContent("Video");
+                        inputfg1 = new VideoInputFragment();
+
                         fTransaction.add(R.id.input_layout,inputfg1);
                     }
                     else{
@@ -107,8 +103,8 @@ public class MainActivity extends AppCompatActivity {
                     setSelected();
                     topAudio.setSelected(true);
                     if(inputfg2 == null){
-                        inputfg2 = new InputFragement();
-                        inputfg2.setContent("Audio");
+                        inputfg2 = new AudioInputFragment();
+
                         fTransaction.add(R.id.input_layout,inputfg2);
                     }
                     else{
@@ -119,8 +115,8 @@ public class MainActivity extends AppCompatActivity {
                     setSelected();
                     topImage.setSelected(true);
                     if(inputfg3 == null){
-                        inputfg3 = new InputFragement();
-                        inputfg3.setContent("Image");
+                        inputfg3 = new ImageInputFragment();
+
                         fTransaction.add(R.id.input_layout,inputfg3);
                     }
                     else{
@@ -131,8 +127,8 @@ public class MainActivity extends AppCompatActivity {
                     setSelected();
                     topText.setSelected(true);
                     if(inputfg4 == null){
-                        inputfg4 = new InputFragement();
-                        inputfg4.setContent("Text");
+                        inputfg4 = new TextInputFragment();
+
                         fTransaction.add(R.id.input_layout,inputfg4);
                         }
                     else{

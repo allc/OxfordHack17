@@ -35,7 +35,7 @@
         android:selectAllOnFocus="true"
         android:singleLine="false"
         android:textColorHint="@color/colorPrimary"
-        app:layout_constraintEnd_toStartOf="@+id/video_clear_button"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_content" />
 
@@ -53,12 +53,15 @@
 
     <Button
         android:id="@+id/video_clear_button"
-        android:layout_width="79dp"
+        android:layout_width="335dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="Clear"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_content" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/video_search_button" />
 
     <TextView
         android:id="@+id/textView"

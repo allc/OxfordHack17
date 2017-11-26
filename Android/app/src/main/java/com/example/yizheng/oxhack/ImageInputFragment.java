@@ -21,14 +21,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -42,12 +46,14 @@ public class ImageInputFragment extends Fragment {
     private ImageView previewImage;
     private File imageFile = null;
     private Button localImageButton;
+    private ListView dataList;
+    private View view;
     private final int cameraCode = 2017;
     private final int localCode = 2018;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedINstanceState){
-        View view = inflater.inflate(R.layout.image_input_fragment,container,false);
+        view = inflater.inflate(R.layout.image_input_fragment,container,false);
 
         URLEditText = (EditText) view.findViewById(R.id.URL_edit_text);
         searchButton = (Button) view.findViewById(R.id.image_search_button);
@@ -55,6 +61,7 @@ public class ImageInputFragment extends Fragment {
         takePicButton = (Button) view.findViewById(R.id.image_take_button);
         previewImage = (ImageView) view.findViewById(R.id.previewImage);
         localImageButton = (Button) view.findViewById(R.id.local_image_button);
+        dataList = (ListView) getActivity().findViewById(R.id.data_list);
         addListeners();
 
         return view;
@@ -62,7 +69,7 @@ public class ImageInputFragment extends Fragment {
 
     private void addListeners(){
         searchButton.setOnClickListener(new ImageSearchButtonListener());
-        clearButton.setOnClickListener(new ClearButtonListener(URLEditText));
+        clearButton.setOnClickListener(new ClearButtonListener(URLEditText,dataList));
         takePicButton.setOnClickListener(new CameraListener(previewImage));
         localImageButton.setOnClickListener(new LocalImageOpenListener());
     }
@@ -85,7 +92,7 @@ public class ImageInputFragment extends Fragment {
 
             previewImage.setImageBitmap(rotationFix(bitmap));
         }
-        else if(requestCode == localCode){
+        else if(requestCode == localCode && data!=null){
             Uri uri = data.getData();
 
             Log.d("local",uri.toString());
@@ -192,6 +199,13 @@ public class ImageInputFragment extends Fragment {
             // Do the HTTP query here.
             String msg= "URL Read: ";
             Log.d(msg,URL);
+        }
+
+
+        public void setList(HashMap<String,String> data){
+
+            ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(view.getContext(),R.layout.list_item, new ArrayList<String>(data.keySet()));
+            dataList.setAdapter(listAdapter);
         }
 
     }

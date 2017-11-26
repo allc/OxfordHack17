@@ -8,8 +8,13 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TableLayout;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private VideoInputFragment inputfg1;
     private AudioInputFragment inputfg2;
     private FragmentManager fManager;
+
+    private ListView list;
 
 
     /*
@@ -57,6 +64,10 @@ public class MainActivity extends AppCompatActivity {
         bindListeners();
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        list = (ListView) findViewById(R.id.data_list);
+
+
+
 
 
         //navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
@@ -71,10 +82,11 @@ public class MainActivity extends AppCompatActivity {
 
         inputLayout = (ConstraintLayout) findViewById(R.id.input_layout);
 
+        /*
         FragmentTransaction fTransaction = fManager.beginTransaction();
         fTransaction.add(R.id.input_layout, new TextInputFragment());
         fTransaction.commit();
-
+        */
         clickListener listener;
         listener = new clickListener();
 
@@ -93,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v){
             FragmentTransaction fTransaction = fManager.beginTransaction();
             hideAllFragement(fTransaction);
+
             switch(v.getId()){
                 case R.id.top_tab1:
                     setSelected();

@@ -125,6 +125,7 @@
             </android.support.constraint.ConstraintLayout>
 
             <ListView
+                android:id="@+id/data_list"
                 android:layout_width="720dp"
                 android:layout_height="500dp"
                 android:background="@color/text_selected"

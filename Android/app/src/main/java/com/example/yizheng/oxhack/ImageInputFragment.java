@@ -3,8 +3,13 @@ package com.example.yizheng.oxhack;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.media.Image;
 import android.net.Uri;
+
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -68,8 +73,54 @@ public class ImageInputFragment extends Fragment {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         if(requestCode == Activity.DEFAULT_KEYS_DIALER){
-            previewImage.setImageURI(Uri.fromFile(imageFile));
+            Bitmap bitmap = BitmapFactory.decodeFile( imageFile.getPath());
+
+            previewImage.setImageBitmap(rotationFix(bitmap));
         }
+    }
+
+    // Method to fix the rotation problem of images.
+    private Bitmap rotationFix(Bitmap bitmap){
+        ExifInterface exif  = null;
+
+        try{
+            exif= new ExifInterface(imageFile.getPath());
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            exif = null;
+        }
+
+        int degree=0;
+        if(exif != null){
+            int ori = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+                    ExifInterface.ORIENTATION_UNDEFINED);
+
+            switch(ori){
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    degree = 90;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    degree = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    degree = 270;
+                    break;
+                default:
+                    degree = 0;
+                    break;
+            }
+
+            if (degree != 0) {
+                Matrix m = new Matrix();
+                m.postRotate(degree);
+
+                bitmap = Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth(),
+                        bitmap.getHeight(), m, true);
+            }
+            return bitmap;
+        }
+        return null;
     }
 
     class CameraListener implements Button.OnClickListener {
@@ -104,6 +155,8 @@ public class ImageInputFragment extends Fragment {
             startActivityForResult(photoIntent,Activity.DEFAULT_KEYS_DIALER);
 
         }
+
+
 
 
 

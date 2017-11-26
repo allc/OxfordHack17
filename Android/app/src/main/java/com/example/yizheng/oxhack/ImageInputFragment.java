@@ -67,7 +67,15 @@ public class ImageInputFragment extends Fragment {
         localImageButton.setOnClickListener(new LocalImageOpenListener());
     }
 
-
+    public File getBufferedImage(){
+        if(imageFile != null){
+            return imageFile;
+        }
+        else{
+            System.err.println("NO FILE LOADED!!!");
+            return null;
+        }
+    }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data){
 
@@ -95,7 +103,7 @@ public class ImageInputFragment extends Fragment {
 
     }
 
-    public String getPath(Uri uri, ContentResolver cr)
+    private String getPath(Uri uri, ContentResolver cr)
     {
         String[] projection = { MediaStore.Images.Media.DATA };
         Cursor cursor = cr.query(uri, projection, null, null, null);
@@ -106,6 +114,7 @@ public class ImageInputFragment extends Fragment {
         cursor.close();
         return s;
     }
+
 
     // Method to fix the rotation problem of images.
     private Bitmap rotationFix(Bitmap bitmap){
@@ -150,6 +159,9 @@ public class ImageInputFragment extends Fragment {
         }
         return null;
     }
+
+
+    // Listeners
 
     class LocalImageOpenListener implements Button.OnClickListener{
 

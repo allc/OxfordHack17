@@ -29,4 +29,7 @@
     <string name="text_content">Enter the text here to search.</string>
     <string name="search_button">Search</string>
     <string name="clear_button">Clear</string>
+
+    <!-- userguide layout bar strings-->
+    <string name="guide_title">User Guide</string>
 </resources>

@@ -40,15 +40,65 @@ public class VideoProcess {
         return null;
     }
 
-    public static void main(String[] args) {
-        VideoProcess vp = new VideoProcess();
-        File f = null;
+    public String getProcessingState(String id) {
         try {
-            f = new File("test.m4v");
-        } catch (Exception e) {
+            URL endpoint = new URL("https://videobreakdown.azure-api.net/Breakdowns/Api/Partner/Breakdowns/" + id + "/State");
+            HttpsURLConnection connection = (HttpsURLConnection) endpoint.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Content-Type", "text/json");
+            connection.setRequestProperty("Ocp-Apim-Subscription-Key", Config.VIDEO_API_KEY);
+            connection.setDoOutput(true);
+
+            StringBuilder response = new StringBuilder ();
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(connection.getInputStream()));
+            String line;
+            while ((line = in.readLine()) != null) {
+                response.append(line);
+            }
+            in.close();
+
+            return response.toString();
+        } catch(Exception e) {
             e.printStackTrace();
         }
-        System.out.println(vp.uploadVideo("hi", f));
+        return null;
+    }
+
+    public String getBreakDown(String id) {
+        try {
+            URL endpoint = new URL("https://videobreakdown.azure-api.net/Breakdowns/Api/Partner/Breakdowns/" + id);
+            HttpsURLConnection connection = (HttpsURLConnection) endpoint.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Content-Type", "text/json");
+            connection.setRequestProperty("Ocp-Apim-Subscription-Key", Config.VIDEO_API_KEY);
+            connection.setDoOutput(true);
+
+            StringBuilder response = new StringBuilder ();
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(connection.getInputStream()));
+            String line;
+            while ((line = in.readLine()) != null) {
+                response.append(line);
+            }
+            in.close();
+
+            return response.toString();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        VideoProcess vp = new VideoProcess();
+//        File f = null;
+//        try {
+//            f = new File("test.m4v");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        System.out.println(vp.getBreakDown("98dcbc00d8"));
     }
 
 }

@@ -14,11 +14,13 @@
         android:id="@+id/txt_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="@string/URL_video"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,12 +28,14 @@
         android:id="@+id/URL_edit_text"
         android:layout_width="247dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:hint="@string/test_string"
         android:selectAllOnFocus="true"
         android:singleLine="false"
         android:textColorHint="@color/colorPrimary"
+        app:layout_constraintEnd_toStartOf="@+id/video_clear_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_content" />
 
@@ -39,9 +43,11 @@
         android:id="@+id/video_search_button"
         android:layout_width="335dp"
         android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Search"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/local_video_button" />
 
@@ -49,19 +55,21 @@
         android:id="@+id/video_clear_button"
         android:layout_width="79dp"
         android:layout_height="48dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
         android:text="Clear"
-        app:layout_constraintStart_toEndOf="@+id/URL_edit_text"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_content" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Local Video"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/URL_edit_text" />
 
@@ -69,20 +77,21 @@
         android:id="@+id/local_video_button"
         android:layout_width="155dp"
         android:layout_height="45dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:text="Local Video"
+        app:layout_constraintEnd_toStartOf="@+id/record_video_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/record_video_button"
-        android:layout_width="146dp"
+        android:layout_width="155dp"
         android:layout_height="45dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginTop="8dp"
         android:text="Record"
-        app:layout_constraintStart_toEndOf="@+id/local_video_button"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </android.support.constraint.ConstraintLayout>

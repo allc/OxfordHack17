@@ -97,6 +97,7 @@
 
             </LinearLayout>
 
+
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/input_layout"
                 android:layout_width="match_parent"
@@ -105,6 +106,27 @@
                 android:minHeight="350dp">
 
             </android.support.constraint.ConstraintLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </TableLayout>
 
         </LinearLayout>
 

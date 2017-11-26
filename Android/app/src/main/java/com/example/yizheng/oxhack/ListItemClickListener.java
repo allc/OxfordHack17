@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Yi Zheng on 11/26/2017.
@@ -17,11 +18,11 @@ import java.util.HashMap;
 
 public class ListItemClickListener implements AdapterView.OnItemClickListener {
 
-    private HashMap<String,String> data;
+    private Map<String,String> data;
     private Activity act;
     private ListView listView;
 
-    public ListItemClickListener(HashMap<String,String> data, Activity act, ListView listView){
+    public ListItemClickListener(Map<String,String> data, Activity act, ListView listView){
         this.data = data;
         this.act =act;
         this.listView = (ListView) listView;

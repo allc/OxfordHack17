@@ -68,6 +68,10 @@ public class MainActivity extends AppCompatActivity {
 
         inputLayout = (ConstraintLayout) findViewById(R.id.input_layout);
 
+        FragmentTransaction fTransaction = fManager.beginTransaction();
+        fTransaction.add(R.id.input_layout, new TextInputFragment());
+        fTransaction.commit();
+
         clickListener listener;
         listener = new clickListener();
 

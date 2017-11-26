@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/text_selected"
     android:minHeight="350dp"
+    android:minWidth="720dp"
     android:orientation="vertical">
 
     <TextView
